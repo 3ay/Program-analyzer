@@ -6,9 +6,9 @@ import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class Main {
-    private static ArrayBlockingQueue<String> queueCountMaxA = new ArrayBlockingQueue<>(100);
-    private static ArrayBlockingQueue<String> queueCountMaxB = new ArrayBlockingQueue<>(100);
-    private static ArrayBlockingQueue<String> queueCountMaxC = new ArrayBlockingQueue<>(100);
+    private static final ArrayBlockingQueue<String> queueCountMaxA = new ArrayBlockingQueue<>(100);
+    private static final ArrayBlockingQueue<String> queueCountMaxB = new ArrayBlockingQueue<>(100);
+    private static final ArrayBlockingQueue<String> queueCountMaxC = new ArrayBlockingQueue<>(100);
 
     private static String stringWithMaxCharA;
     private static String stringWithMaxCharB;
@@ -77,8 +77,7 @@ public class Main {
             }
             try {
                 Thread.sleep(100);
-            } catch (InterruptedException e) {
-                return;
+            } catch (InterruptedException ignored) {
             }
         }
         );
@@ -87,8 +86,7 @@ public class Main {
         {
             try {
                 stringWithMaxCharA = findStringWithMaxChar(queueCountMaxA, 'a');
-            } catch (InterruptedException e) {
-                return;
+            } catch (InterruptedException ignored) {
             }
         }
         );
@@ -99,8 +97,7 @@ public class Main {
         {
             try {
                 stringWithMaxCharB = findStringWithMaxChar(queueCountMaxB, 'b');
-            } catch (InterruptedException e) {
-                return;
+            } catch (InterruptedException ignored) {
             }
         }
         );
