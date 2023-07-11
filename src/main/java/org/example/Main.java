@@ -108,8 +108,7 @@ public class Main {
         {
             try {
                 stringWithMaxCharC = findStringWithMaxChar(queueCountMaxC, 'c');
-            } catch (InterruptedException e) {
-                return;
+            } catch (InterruptedException ignored) {
             }
         }
         );
