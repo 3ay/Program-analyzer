@@ -10,9 +10,6 @@ public class Main {
     private static final ArrayBlockingQueue<String> queueCountMaxB = new ArrayBlockingQueue<>(100);
     private static final ArrayBlockingQueue<String> queueCountMaxC = new ArrayBlockingQueue<>(100);
 
-    private static String stringWithMaxCharA;
-    private static String stringWithMaxCharB;
-    private static String stringWithMaxCharC;
 
     public static String generateText(String letters, int length) {
         Random random = new Random();
@@ -33,7 +30,7 @@ public class Main {
         return count;
     }
 
-    public static String findStringWithMaxChar(ArrayBlockingQueue<String> str, char ch) throws InterruptedException {
+    public static String findStringWithMaxChar(ArrayBlockingQueue<String> str, char ch) {
         String strResult = "";
         int countResult = 0;
         for (int i = 0; i < 100; i++) {
@@ -83,34 +80,19 @@ public class Main {
         );
         threadGenerator.start();
         Thread threadCountMaxA = new Thread(() ->
-        {
-            try {
-                stringWithMaxCharA = findStringWithMaxChar(queueCountMaxA, 'a');
-            } catch (InterruptedException ignored) {
-            }
-        }
+                System.out.println("В строке содержится максимальное количество символов 'a':" + "\n" + findStringWithMaxChar(queueCountMaxA, 'a'))
         );
         threads.add(threadCountMaxA);
         threadCountMaxA.start();
 
         Thread threadCountMaxB = new Thread(() ->
-        {
-            try {
-                stringWithMaxCharB = findStringWithMaxChar(queueCountMaxB, 'b');
-            } catch (InterruptedException ignored) {
-            }
-        }
+                System.out.println("В строке содержится максимальное количество символов 'b':" + "\n" + findStringWithMaxChar(queueCountMaxB, 'b'))
         );
         threads.add(threadCountMaxB);
         threadCountMaxB.start();
 
         Thread threadCountMaxC = new Thread(() ->
-        {
-            try {
-                stringWithMaxCharC = findStringWithMaxChar(queueCountMaxC, 'c');
-            } catch (InterruptedException ignored) {
-            }
-        }
+                System.out.println("В строке содержится максимальное количество символов 'c':" + "\n" + findStringWithMaxChar(queueCountMaxC, 'c'))
         );
         threads.add(threadCountMaxC);
         threadCountMaxC.start();
@@ -119,8 +101,5 @@ public class Main {
             thread.join();
         }
         threadGenerator.interrupt();
-        System.out.println("В строке содержится максимальное количество символов 'a':" + "\n" + stringWithMaxCharA);
-        System.out.println("В строке содержится максимальное количество символов 'b':" + "\n" + stringWithMaxCharB);
-        System.out.println("В строке содержится максимальное количество символов 'c':" + "\n" + stringWithMaxCharC);
     }
 }
